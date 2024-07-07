@@ -51,9 +51,8 @@
 <script setup>
 const movies = ref([]);
 const series = ref([]);
-const error = ref(null);
 
-const { data, error: fetchError } = await useFetch("/api/movies/discover", {
+const { data, error } = await useFetch("/api/movies/discover", {
   transform: (data) => {
     return {
       movies: data.movies.results,
@@ -69,11 +68,6 @@ if (data.value) {
 
 if (error.value) {
   console.error("Error fetching data:", error.value);
-}
-
-if (fetchError.value) {
-  error.value = fetchError.value;
-  console.error("Error fetching data:", fetchError.value);
 }
 </script>
 

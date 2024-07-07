@@ -52,9 +52,10 @@ defineProps([
 ]);
 
 const imageSiteUrl = "https://image.tmdb.org/t/p/w500";
-
 const itemState = useState("choosenItem", () => {});
 const changeItemState = (item) => {
   itemState.value = item;
 };
+
+// TODO : Create beautiful loading animation while image still loading
 </script>
