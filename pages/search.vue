@@ -115,7 +115,7 @@ const fetchMoviesAndSeries = async () => {
 };
 
 // Create a debounced version of the fetch function
-const debouncedFetch = debounce(fetchMoviesAndSeries, 1500);
+const debouncedFetch = debounce(fetchMoviesAndSeries, 750);
 
 watch(searchTerm, () => {
   if (searchTerm.value.trim()) {
@@ -124,5 +124,12 @@ watch(searchTerm, () => {
     movies.value = [];
     series.value = [];
   }
+});
+
+// Clear the search term when the component is mounted
+onMounted(() => {
+  searchTerm.value = "";
+  movies.value = [];
+  series.value = [];
 });
 </script>

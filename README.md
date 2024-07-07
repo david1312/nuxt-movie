@@ -1,5 +1,9 @@
 # Movie Info App Using Nuxt 3
 
+# URL
+
+This app is live! you can check on here : https://nuxt3-movie-app-dav13.netlify.app/
+
 # Nuxt 3 Minimal Starter
 
 Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
