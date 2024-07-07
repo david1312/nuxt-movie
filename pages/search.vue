@@ -46,7 +46,7 @@
     <section>
       <h1
         v-if="movies.length"
-        class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-dark"
+        class="mb-4 text-2xl font-extrabold leading-none tracking-tight text-gray-900 md:text-2xl lg:text-4xl dark:text-dark"
       >
         Movie Search Results
       </h1>
@@ -69,7 +69,7 @@
     </section>
     <section v-if="series.length">
       <h1
-        class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-dark"
+        class="mb-4 text-2xl font-extrabold leading-none tracking-tight text-gray-900 md:text-2xl lg:text-4xl dark:text-dark"
       >
         Series Search Results
       </h1>
