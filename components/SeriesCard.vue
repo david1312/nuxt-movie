@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col h-full">
+  <div class="flex flex-col h-full justify-center items-center">
     <div
       class="flex flex-col flex-grow max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 transform transition-transform hover:-translate-y-3"
     >
@@ -43,6 +43,8 @@
   </div>
 </template>
 <script setup>
+import { useItem } from "~/store/useItem";
+
 defineProps([
   "id",
   "name",
@@ -55,7 +57,7 @@ defineProps([
 
 const imageSiteUrl = "https://image.tmdb.org/t/p/w500";
 
-const itemState = useState("choosenItem", () => {});
+const itemState = useItem();
 const changeItemState = (item) => {
   itemState.value = item;
 };

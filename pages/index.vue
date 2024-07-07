@@ -1,11 +1,10 @@
 <template>
   <div>
-    <!-- todo create error pop up alert with transisition -->
     <section>
       <h1
         class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-dark"
       >
-        Featured D'Movies
+        Featured DaMovies
       </h1>
       <ul
         class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4"
@@ -70,14 +69,3 @@ if (error.value) {
   console.error("Error fetching data:", error.value);
 }
 </script>
-
-<style>
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s;
-}
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
-</style>
