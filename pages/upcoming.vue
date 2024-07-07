@@ -3,7 +3,7 @@
     <!-- todo create error pop up alert with transisition -->
     <section>
       <h1
-        class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-dark"
+        class="mb-4 text-2xl font-extrabold leading-none tracking-tight text-gray-900 md:text-2xl lg:text-4xl dark:text-dark"
       >
         Upcoming Movies
       </h1>
