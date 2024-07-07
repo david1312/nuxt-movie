@@ -26,8 +26,6 @@
   </div>
 </template>
 <script setup>
-import MovieCard from "./components/MovieCard.vue";
-
 const movies = ref([]);
 
 const { data, error } = await useFetch("/api/movies/now-playing", {
@@ -45,5 +43,4 @@ if (data.value) {
 if (error.value) {
   console.error("Error fetching data:", error.value);
 }
-console.log({ movies });
 </script>

@@ -49,9 +49,6 @@
   </div>
 </template>
 <script setup>
-import MovieCard from "./components/MovieCard.vue";
-import SeriesCard from "./components/SeriesCard.vue";
-
 const movies = ref([]);
 const series = ref([]);
 const error = ref(null);

@@ -28,8 +28,6 @@
 
 <script setup>
 import { ref } from "vue";
-import MovieCard from "./components/MovieCard.vue";
-
 const movies = ref([]);
 
 const { data, error } = await useFetch("/api/movies/popular", {
