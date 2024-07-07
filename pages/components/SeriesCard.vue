@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="flex flex-col h-full">
     <div
-      class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+      class="flex flex-col flex-grow max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 transform transition-transform hover:-translate-y-3"
     >
       <NuxtLink @click="changeItemState(item)" :to="`/item/${name}`">
         <img
@@ -44,6 +44,7 @@
 </template>
 <script setup>
 defineProps([
+  "id",
   "name",
   "overview",
   "first_air_date",

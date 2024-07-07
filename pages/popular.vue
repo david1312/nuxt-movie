@@ -6,8 +6,10 @@
       >
         Popular Movies
       </h1>
-      <ul class="grid grid-cols-5 gap">
-        <li v-for="mov in movies">
+      <ul
+        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4"
+      >
+        <li v-for="mov in movies" :key="mov.id" class="flex">
           <MovieCard
             :poster_path="mov.poster_path"
             :title="mov.title"
@@ -16,14 +18,16 @@
             :release_date="mov.release_date"
             :popularity="mov.popularity"
             :item="mov"
+            class="flex flex-col flex-grow"
           />
         </li>
-        <br /><br />
       </ul>
     </section>
   </div>
 </template>
+
 <script setup>
+import { ref } from "vue";
 import MovieCard from "./components/MovieCard.vue";
 
 const movies = ref([]);
@@ -31,7 +35,7 @@ const movies = ref([]);
 const { data, error } = await useFetch("/api/movies/popular", {
   transform: (data) => {
     return {
-      movies: data.popular.results,
+      movies: data.popularMovies.results,
     };
   },
 });
@@ -43,5 +47,4 @@ if (data.value) {
 if (error.value) {
   console.error("Error fetching data:", error.value);
 }
-console.log({ movies });
 </script>

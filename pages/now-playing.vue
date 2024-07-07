@@ -6,8 +6,10 @@
       >
         Now Playing Movies
       </h1>
-      <ul class="grid grid-cols-5 gap">
-        <li v-for="mov in movies">
+      <ul
+        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4"
+      >
+        <li v-for="mov in movies" :key="mov.id" class="flex">
           <MovieCard
             :poster_path="mov.poster_path"
             :title="mov.title"

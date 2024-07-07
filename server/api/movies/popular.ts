@@ -4,7 +4,7 @@ export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig(event);
   const { AccessToken } = config;
 
-  const popular: any[] = await $fetch(API_URLS.POPULAR, {
+  const popularMovies: any[] = await $fetch(API_URLS.POPULAR, {
     method: "get",
     headers: {
       accept: "application/json",
@@ -12,5 +12,5 @@ export default defineEventHandler(async (event) => {
     },
   });
 
-  return { popular };
+  return { popularMovies };
 });
