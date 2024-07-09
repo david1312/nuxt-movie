@@ -4,7 +4,7 @@
       <h1
         class="mb-4 text-2xl font-extrabold leading-none tracking-tight text-gray-900 md:text-2xl lg:text-4xl dark:text-dark"
       >
-        Featured Dav'Movies x Netifly
+        Featured D''Movies x Netifly
       </h1>
       <ul
         class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4"
@@ -27,7 +27,7 @@
       <h1
         class="mb-4 text-2xl font-extrabold leading-none tracking-tight text-gray-900 md:text-2xl lg:text-4xl dark:text-dark"
       >
-        Featured Dav'Series x Netifly
+        Featured D''Series x Netifly
       </h1>
       <ul
         class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4"

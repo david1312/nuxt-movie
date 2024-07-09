@@ -1,68 +1,37 @@
 import { Server } from "socket.io";
-import { IncomingMessage, ServerResponse } from "http";
-import { Socket } from "net";
+import { createServer } from "http";
+import { joinRoom, createRoom, handleMessage } from "./services/chat-services";
 
-interface ChatMessage {
-  message: string;
-  timestamp: Date;
-}
-
-interface Rooms {
-  [key: string]: ChatMessage[];
-}
-
-const rooms: Rooms = {};
-
-const io = new Server({
+const httpServer = createServer();
+const io = new Server(httpServer, {
   cors: {
     origin: "*",
   },
 });
 
 io.on("connection", (socket) => {
-  console.log("a user connected");
+  console.log(`User connected with socket ID: ${socket.id}`);
 
-  socket.on("joinRoom", (room: string) => {
-    socket.join(room);
-    console.log(`User joined room: ${room}`);
-
-    if (!rooms[room]) {
-      rooms[room] = [];
-    }
-
-    socket.emit("previousMessages", rooms[room]);
+  socket.on("joinRoom", ({ room, username }) => {
+    console.log(`${username} joined room: ${room}`);
+    const messages = joinRoom(room, socket);
+    socket.emit("previousMessages", messages);
   });
 
-  socket.on("createRoom", (room: string) => {
-    socket.join(room);
-    console.log(`Room created: ${room}`);
-    if (!rooms[room]) {
-      rooms[room] = [];
-    }
+  socket.on("createRoom", ({ room, username }) => {
+    console.log(`${username} created room: ${room}`);
+    createRoom(room, socket);
   });
 
-  socket.on(
-    "message",
-    ({ room, message }: { room: string; message: string }) => {
-      const chatMessage: ChatMessage = { message, timestamp: new Date() };
-      rooms[room].push(chatMessage);
-      io.to(room).emit("message", chatMessage);
-    }
-  );
+  socket.on("message", ({ room, message, username }) => {
+    handleMessage(room, message, username, io);
+  });
 
   socket.on("disconnect", () => {
-    console.log("user disconnected");
+    console.log(`User disconnected with socket ID: ${socket.id}`);
   });
 });
 
-export default function (
-  req: IncomingMessage,
-  res: ServerResponse & { socket: Socket & { server: any } }
-) {
-  if (res.socket && !res.socket.server.io) {
-    console.log("Starting socket.io server...");
-    io.attach(res.socket.server);
-    res.socket.server.io = io;
-  }
-  res.end();
-}
+httpServer.listen(3001, () => {
+  console.log("Socket.io server listening on port 3001");
+});
