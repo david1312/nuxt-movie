@@ -22,11 +22,11 @@ export default defineNuxtConfig({
   runtimeConfig: {
     AccessToken: process.env.AccessToken,
     public: {
-      apiBase: "/api", // Public runtime configurations can be accessed both client-side and server-side
+      apiBase: "/api",
     },
   },
   nitro: {
-    preset: "node-server", // Ensure using a node-server preset
+    preset: "node-server",
   },
   hooks: {
     listen: async () => {
@@ -34,13 +34,9 @@ export default defineNuxtConfig({
     },
   },
   vite: {
-    // This is where you can extend Vite configurations
     build: {
-      sourcemap: true, // Example of setting sourcemaps
+      sourcemap: true,
     },
-    plugins: [
-      // Example of adding Vite plugins
-    ],
     resolve: {
       alias: {
         "@": "/<rootDir>",
