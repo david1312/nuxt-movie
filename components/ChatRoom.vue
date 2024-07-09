@@ -18,14 +18,8 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import { ref, onMounted, onBeforeUnmount } from "vue";
-
-interface ChatMessage {
-  message: string;
-  username: string;
-  timestamp: Date;
-}
 
 const props = defineProps({
   room: {
@@ -38,16 +32,16 @@ const props = defineProps({
   },
 });
 
-const messages = ref<ChatMessage[]>([]);
+const messages = ref([]);
 const newMessage = ref("");
 
 const { $socket } = useNuxtApp();
 
-const handlePreviousMessages = (msgs: ChatMessage[]) => {
+const handlePreviousMessages = (msgs) => {
   messages.value = msgs;
 };
 
-const handleMessage = (message: ChatMessage) => {
+const handleMessage = (message) => {
   messages.value.push(message);
 };
 

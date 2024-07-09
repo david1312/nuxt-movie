@@ -5,7 +5,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import { usernameChat } from "~/store/useItem";
 import { ref, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
@@ -13,7 +13,7 @@ import ChatRoom from "~/components/ChatRoom.vue";
 
 const route = useRoute();
 const router = useRouter();
-const room = ref(route.params.room as string);
+const room = ref(route.params.room);
 const username = usernameChat();
 
 onMounted(() => {

@@ -6,7 +6,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import { usernameChat } from "~/store/useItem";
 import { ref, computed } from "vue";
 import { useRouter } from "vue-router";
