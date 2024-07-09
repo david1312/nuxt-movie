@@ -22,8 +22,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     AccessToken: process.env.AccessToken,
     public: {
-      // Public runtime configurations can be accessed both client-side and server-side
-      apiBase: "/api",
+      apiBase: "/api", // Public runtime configurations can be accessed both client-side and server-side
     },
   },
   nitro: {
@@ -32,6 +31,20 @@ export default defineNuxtConfig({
   hooks: {
     listen: async () => {
       await import("./server/chat/ws-server");
+    },
+  },
+  vite: {
+    // This is where you can extend Vite configurations
+    build: {
+      sourcemap: true, // Example of setting sourcemaps
+    },
+    plugins: [
+      // Example of adding Vite plugins
+    ],
+    resolve: {
+      alias: {
+        "@": "/<rootDir>",
+      },
     },
   },
 });
