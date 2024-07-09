@@ -1,0 +1,7 @@
+[build]
+  command = "npm install -g nuxi && npm run build"
+  publish = "dist"
+  environment = { NODE_VERSION = "22" }
+
+[context.production.environment]
+  NODE_ENV = "production"
