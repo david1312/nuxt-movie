@@ -42,7 +42,7 @@
         </button> -->
       </div>
     </form>
-
+    <Loading :showLoading="showLoading" />
     <section>
       <h1
         v-if="movies.length"
@@ -93,16 +93,21 @@
 </template>
 <script setup>
 import { debounce } from "lodash";
+import Loading from "~/components/Loading.vue";
 const searchTerm = useState("searchTerm", () => "");
 const movies = ref([]);
 const series = ref([]);
+const showLoading = ref(false);
 
 const fetchMoviesAndSeries = async () => {
+  showLoading.value = true;
   const { data, error } = await useFetch("/api/movies/search", {
     query: {
       searchTerm: searchTerm.value,
     },
   });
+
+  showLoading.value = false;
 
   if (data.value) {
     movies.value = data.value.movies.results;
@@ -115,7 +120,7 @@ const fetchMoviesAndSeries = async () => {
 };
 
 // Create a debounced version of the fetch function
-const debouncedFetch = debounce(fetchMoviesAndSeries, 750);
+const debouncedFetch = debounce(fetchMoviesAndSeries, 500);
 
 watch(searchTerm, () => {
   if (searchTerm.value.trim()) {
