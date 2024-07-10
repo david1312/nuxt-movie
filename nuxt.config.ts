@@ -22,16 +22,13 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     AccessToken: process.env.AccessToken,
-    public: {
-      apiBase: "/api",
-    },
   },
-  nitro: {
-    preset: "node-server",
-  },
-  hooks: {
-    listen: async () => {
-      setupWebSocketServer();
-    },
-  },
+  // nitro: {
+  //   preset: "node-server",
+  // },
+  // hooks: {
+  //   listen: async () => {
+  //     setupWebSocketServer();
+  //   },
+  // },
 });
