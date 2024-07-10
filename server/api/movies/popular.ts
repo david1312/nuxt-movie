@@ -1,16 +1,16 @@
 import { API_URLS } from "~/utils/apiUrl";
+import { useAxios } from "~/composables/useAxios";
+import { Movie } from "~/server/model/movie";
 
-export default defineEventHandler(async (event) => {
-  const config = useRuntimeConfig(event);
-  const { AccessToken } = config;
+export default defineEventHandler(async () => {
+  const api = useAxios();
+  try {
+    const popularMoviesResponse = await api.get(API_URLS.POPULAR);
+    const popularMovies: Movie[] = popularMoviesResponse.data;
 
-  const popularMovies: any[] = await $fetch(API_URLS.POPULAR, {
-    method: "get",
-    headers: {
-      accept: "application/json",
-      Authorization: `Bearer ${AccessToken}`,
-    },
-  });
-
-  return { popularMovies };
+    return { popularMovies };
+  } catch (error) {
+    console.error("error api popular:", error);
+    throw error;
+  }
 });

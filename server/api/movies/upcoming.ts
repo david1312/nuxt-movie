@@ -1,16 +1,16 @@
 import { API_URLS } from "~/utils/apiUrl";
+import { useAxios } from "~/composables/useAxios";
+import { Movie } from "~/server/model/movie";
 
-export default defineEventHandler(async (event) => {
-  const config = useRuntimeConfig(event);
-  const { AccessToken } = config;
+export default defineEventHandler(async () => {
+  const api = useAxios();
+  try {
+    const upcomingMoviesResponse = await api.get(API_URLS.UPCOMING_MOVIES);
+    const upcomingMovies: Movie[] = upcomingMoviesResponse.data;
 
-  const upcomingMovies: any[] = await $fetch(API_URLS.UPCOMING_MOVIES, {
-    method: "get",
-    headers: {
-      accept: "application/json",
-      Authorization: `Bearer ${AccessToken}`,
-    },
-  });
-
-  return { upcomingMovies };
+    return { upcomingMovies };
+  } catch (error) {
+    console.error("error api upcoming:", error);
+    throw error;
+  }
 });
