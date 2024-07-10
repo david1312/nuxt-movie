@@ -1,11 +1,25 @@
-// import { Movie } from "~/server/model/movie";
+import { Movie } from "~/server/model/movie";
 // import mockMovies from "~/data/mockApiMovies.json";
 // import mockSeries from "~/data/mockApiSeries.json";
+import axios from "axios";
 import { API_URLS } from "~/utils/apiUrl";
+import { useNuxtApp } from "nuxt/app";
 
 export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig(event);
   const { AccessToken } = config;
+  const nuxtApp = useNuxtApp();
+  const api = nuxtApp.$axios;
+
+  const test = await api.get(API_URLS.MOVIES, {
+    params: {
+      include_adult: false,
+      include_video: false,
+      language: "en-US",
+      page: "1",
+      sort_by: "popularity.desc",
+    },
+  });
 
   const movies: any[] = await $fetch(API_URLS.MOVIES, {
     method: "get",

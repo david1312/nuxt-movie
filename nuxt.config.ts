@@ -2,6 +2,7 @@ export default defineNuxtConfig({
   compatibilityDate: "2024-04-03",
   devtools: { enabled: true },
   components: true,
+  plugins: ["~/plugins/axios.ts"],
   modules: ["@nuxtjs/tailwindcss"],
   app: {
     pageTransition: {
@@ -24,5 +25,6 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     AccessToken: process.env.AccessToken,
+    ApiBaseUrl: process.env.ApiBaseUrl,
   },
 });
