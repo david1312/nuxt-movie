@@ -26,9 +26,9 @@ export default defineNuxtConfig({
   nitro: {
     preset: "node-server",
   },
-  // hooks: {
-  //   listen: async () => {
-  //     setupWebSocketServer();
-  //   },
-  // },
+  hooks: {
+    listen: async () => {
+      setupWebSocketServer();
+    },
+  },
 });
