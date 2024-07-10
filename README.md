@@ -14,7 +14,7 @@ Improvements that I think can be made, and I will do it as soon as possible in m
 
 - [] Use Axios instead of the Fetch API and leverage its interceptor feature to add headers, so we don't need to add the token every time we make a request. Implement cancel token.
 - [] Refactor constant URLs to use a base URL, so in case the base URL changes, we only need to update one file.
-- [] Create a beautiful skeleton loader for images while they are still loading and loading animation when search loading
+- [] reate a beautiful skeleton loader for images while they are still loading and loading animation when search loading
 - [x] Implement a simple chat feature to chat with other users, just for fun.
 
 ## Setup
