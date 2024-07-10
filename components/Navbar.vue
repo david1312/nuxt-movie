@@ -42,47 +42,13 @@
           <ul
             class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700"
           >
-            <li>
+            <li v-for="nav in NAV_ITEMS" :key="nav.href">
               <NuxtLink
-                to="/"
-                class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500"
+                :to="nav.href"
+                class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                active-class="nuxt-link-active"
                 aria-current="page"
-                >Home</NuxtLink
-              >
-            </li>
-            <li>
-              <NuxtLink
-                to="/search"
-                class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-                >Search</NuxtLink
-              >
-            </li>
-            <li>
-              <NuxtLink
-                to="/popular"
-                class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-                >Popular</NuxtLink
-              >
-            </li>
-            <li>
-              <NuxtLink
-                to="/now-playing"
-                class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-                >Now Playing</NuxtLink
-              >
-            </li>
-            <li>
-              <NuxtLink
-                to="/top-rated"
-                class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-                >Top Rated</NuxtLink
-              >
-            </li>
-            <li>
-              <NuxtLink
-                to="/upcoming"
-                class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-                >Upcoming</NuxtLink
+                >{{ nav.label }}</NuxtLink
               >
             </li>
           </ul>
@@ -91,3 +57,24 @@
     </nav>
   </div>
 </template>
+
+<script setup lang="ts">
+interface NavMenu {
+  href: string;
+  label: string;
+  specialMenu: boolean;
+}
+const NAV_ITEMS: NavMenu[] = [
+  { href: "/", label: "Home", specialMenu: false },
+  { href: "/search", label: "Search", specialMenu: false },
+  { href: "/popular", label: "Popular", specialMenu: false },
+  { href: "/now-playing", label: "Now Playing", specialMenu: false },
+  { href: "/top-rated", label: "Top Rated", specialMenu: false },
+  { href: "/upcoming", label: "Upcoming", specialMenu: false },
+];
+</script>
+<style>
+.nuxt-link-active {
+  color: #3b82f6 !important; /* Tailwind's blue-500 color */
+}
+</style>

@@ -1,16 +1,16 @@
 import { API_URLS } from "~/utils/apiUrl";
+import { useAxios } from "~/composables/useAxios";
+import { Movie } from "~/server/model/movie";
 
-export default defineEventHandler(async (event) => {
-  const config = useRuntimeConfig(event);
-  const { AccessToken } = config;
+export default defineEventHandler(async () => {
+  const api = useAxios();
+  try {
+    const nowPlayingResponse = await api.get(API_URLS.NOW_PLAYING);
+    const nowPlayingMovies: Movie[] = nowPlayingResponse.data;
 
-  const nowPlayingMovies: any[] = await $fetch(API_URLS.NOW_PLAYING, {
-    method: "get",
-    headers: {
-      accept: "application/json",
-      Authorization: `Bearer ${AccessToken}`,
-    },
-  });
-
-  return { nowPlayingMovies };
+    return { nowPlayingMovies };
+  } catch (error) {
+    console.error("error api now playing:", error);
+    throw error;
+  }
 });
