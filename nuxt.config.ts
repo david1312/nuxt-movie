@@ -23,9 +23,9 @@ export default defineNuxtConfig({
   runtimeConfig: {
     AccessToken: process.env.AccessToken,
   },
-  // nitro: {
-  //   preset: "node-server",
-  // },
+  nitro: {
+    preset: "node-server",
+  },
   // hooks: {
   //   listen: async () => {
   //     setupWebSocketServer();
