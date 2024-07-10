@@ -1,3 +1,4 @@
+import { setupWebSocketServer } from "./server/chat/ws-server";
 export default defineNuxtConfig({
   compatibilityDate: "2024-04-03",
   buildDir: "dist",
@@ -30,7 +31,7 @@ export default defineNuxtConfig({
   },
   hooks: {
     listen: async () => {
-      await import("./server/chat/ws-server");
+      setupWebSocketServer();
     },
   },
 });
