@@ -43,7 +43,7 @@
   </div>
 </template>
 <script setup>
-import { useItem } from "~/store/useItem";
+import { useItem } from "~/composables/useItem";
 
 defineProps([
   "id",

@@ -1,24 +1,21 @@
+import { Movie } from "~/server/model/movie";
 import { API_URLS } from "~/utils/apiUrl";
+import { useAxios } from "~/composables/useAxios";
 
 export default defineEventHandler(async (event) => {
-  const config = useRuntimeConfig(event);
-  const { AccessToken } = config;
+  const api = useAxios();
+  const query = getQuery(event);
+  try {
+    const topRatedMoviesResponse = await api.get(API_URLS.TOP_RATED_MOVIES);
 
-  const topRatedMovies: any[] = await $fetch(API_URLS.TOP_RATED_MOVIES, {
-    method: "get",
-    headers: {
-      accept: "application/json",
-      Authorization: `Bearer ${AccessToken}`,
-    },
-  });
+    const topRatedSeriesResponse = await api.get(API_URLS.TOP_RATED_SERIES);
 
-  const topRatedSeries: any[] = await $fetch(API_URLS.TOP_RATED_SERIES, {
-    method: "get",
-    headers: {
-      accept: "application/json",
-      Authorization: `Bearer ${AccessToken}`,
-    },
-  });
+    const topRatedMovies: Movie[] = topRatedMoviesResponse.data;
+    const topRatedSeries: Movie[] = topRatedSeriesResponse.data;
 
-  return { topRatedMovies, topRatedSeries };
+    return { topRatedMovies, topRatedSeries };
+  } catch (error) {
+    console.error("error api search:", error);
+    throw error;
+  }
 });

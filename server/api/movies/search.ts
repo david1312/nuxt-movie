@@ -1,33 +1,29 @@
+import { Movie } from "~/server/model/movie";
 import { API_URLS } from "~/utils/apiUrl";
+import { useAxios } from "~/composables/useAxios";
 
 export default defineEventHandler(async (event) => {
-  const config = useRuntimeConfig(event);
-  const { AccessToken } = config;
+  const api = useAxios();
+  const query = getQuery(event);
+  try {
+    const moviesResponse = await api.get(API_URLS.SEARCH_MOVIES, {
+      params: {
+        query: query.searchTerm || "",
+      },
+    });
 
-  const userQuery = getQuery(event);
-  const { searchTerm } = userQuery;
+    const seriesResponse = await api.get(API_URLS.SEARCH_SERIES, {
+      params: {
+        query: query.searchTerm || "",
+      },
+    });
 
-  const movies: any[] = await $fetch(API_URLS.SEARCH_MOVIES, {
-    method: "get",
-    headers: {
-      accept: "application/json",
-      Authorization: `Bearer ${AccessToken}`,
-    },
-    query: {
-      query: searchTerm,
-    },
-  });
+    const movies: Movie[] = moviesResponse.data;
+    const series: Movie[] = seriesResponse.data;
 
-  const series: any[] = await $fetch(API_URLS.SEARCH_SERIES, {
-    method: "get",
-    headers: {
-      accept: "application/json",
-      Authorization: `Bearer ${AccessToken}`,
-    },
-    query: {
-      query: searchTerm,
-    },
-  });
-
-  return { movies, series };
+    return { movies, series };
+  } catch (error) {
+    console.error("error api search:", error);
+    throw error;
+  }
 });

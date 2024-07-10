@@ -24,5 +24,6 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     AccessToken: process.env.AccessToken,
+    ApiBaseUrl: process.env.ApiBaseUrl,
   },
 });

@@ -12,14 +12,14 @@ Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introdu
 
 Improvements that I think can be made, and I will do it as soon as possible in my free time
 
-- [ ] Use Axios instead of the Fetch API and leverage its interceptor feature to add headers, so we don't need to add the token every time we make a request. Implement cancel token.
+- [x] Use Axios instead of the Fetch API and leverage its interceptor feature to add headers, so we don't need to add the token every time we make a request. Implement cancel token.
 - [x] Refactor constant URLs to use a base URL, so in case the base URL changes, we only need to update one file.
 - [x] Implement loading when search the movie
 - [ ] Implement a simple chat feature to chat with other users, just for fun.
 
 ## Notes
 
-Somehow i still failed deploy the websocket server (CHAT FEATURE) on netlify, if you want try the chat feature u can try it locally :
+It appears that deploying the WebSocket server for the chat feature on Netlify is problematic because Netlify doesn't support running services on different ports. Since the WebSocket server for chat services needs to be deployed on a different port, you can try the chat feature locally by following these steps:
 
 1. git clone https://github.com/david1312/nuxt-movie.git
 2. git checkout feat/chat
