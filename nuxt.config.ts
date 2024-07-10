@@ -33,14 +33,4 @@ export default defineNuxtConfig({
       await import("./server/chat/ws-server");
     },
   },
-  vite: {
-    build: {
-      sourcemap: true,
-    },
-    resolve: {
-      alias: {
-        "@": "/<rootDir>",
-      },
-    },
-  },
 });
