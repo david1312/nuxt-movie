@@ -2,8 +2,8 @@
   <div>
     <SplashScreen />
     <Navbar />
-    <main class="p-2 md:p-2 lg:p-4">
-      <slot />
-    </main>
+    <div class="p-2 md:p-4 lg:p-4">
+      <NuxtPage />
+    </div>
   </div>
 </template>

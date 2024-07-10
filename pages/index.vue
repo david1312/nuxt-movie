@@ -69,3 +69,14 @@ if (error.value) {
   console.error("Error fetching data:", error.value);
 }
 </script>
+
+<style>
+.page-enter-active,
+.page-leave-active {
+  transition: transform 0.5s;
+}
+.page-enter,
+.page-leave-to {
+  transform: rotateY(90deg);
+}
+</style>
