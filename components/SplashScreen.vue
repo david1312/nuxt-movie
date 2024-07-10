@@ -28,7 +28,7 @@ const showSpinner = ref(true);
 onMounted(() => {
   setTimeout(() => {
     showSpinner.value = false;
-    loadingText.value = "Loading Completed. Welcome to Dav's Movie App 😊"; // Change the text to a smile emoticon
+    loadingText.value = "Loading Completed. Welcome to D' Movie App 😊"; // Change the text to a smile emoticon
     setTimeout(() => {
       showSplash.value = false;
     }, 1500); // Hide the splash screen after 1 second
