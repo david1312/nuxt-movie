@@ -153,6 +153,7 @@ onMounted(() => {
   }
   socket.value = io({
     path: "/api/chat/ws",
+    transports: ["websocket", "polling"],
   });
   //   Join ChatRoom
   socket.value.emit("joinRom", { username, room });
@@ -171,4 +172,3 @@ onBeforeUnmount(() => {
 </script>
 
 <style scoped></style>
--->
