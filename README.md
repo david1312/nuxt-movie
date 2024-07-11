@@ -19,10 +19,10 @@ Improvements that I think can be made, and I will do it as soon as possible in m
 
 ## Notes
 
-It appears that deploying the WebSocket server for the chat feature on Netlify is problematic because Netlify doesn't support running services on different ports. Since the WebSocket server for chat services needs to be deployed on a different port, you can try the chat feature locally by following these steps:
+It appears that deploying the WebSocket server for the chat feature on Netlify is problematic because Netlify  is primarily designed for static site hosting and serverless functions, which do not support WebSockets natively. You can try the chat feature locally by following these steps:
 
 1. git clone https://github.com/david1312/nuxt-movie.git
-2. git checkout feat/chat
+2. git checkout feat/chat-plugin
 3. npn install then npm run dev
 
 ## Setup
