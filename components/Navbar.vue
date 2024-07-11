@@ -48,7 +48,13 @@
                 class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
                 active-class="nuxt-link-active"
                 aria-current="page"
-                >{{ nav.label }}</NuxtLink
+                >{{ nav.label }}
+                <span
+                  v-if="nav.specialMenu"
+                  class="bg-red-500 text-white text-xs px-2 py-1 rounded-full"
+                >
+                  EXPERIMENTAL
+                </span></NuxtLink
               >
             </li>
           </ul>
@@ -67,10 +73,10 @@ interface NavMenu {
 const NAV_ITEMS: NavMenu[] = [
   { href: "/", label: "Home", specialMenu: false },
   { href: "/search", label: "Search", specialMenu: false },
-  { href: "/popular", label: "Popular", specialMenu: false },
   { href: "/now-playing", label: "Now Playing", specialMenu: false },
   { href: "/top-rated", label: "Top Rated", specialMenu: false },
   { href: "/upcoming", label: "Upcoming", specialMenu: false },
+  { href: "/chat", label: "Chat", specialMenu: true },
 ];
 </script>
 <style>

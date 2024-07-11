@@ -2,9 +2,8 @@ import { Movie } from "~/server/model/movie";
 import { API_URLS } from "~/utils/apiUrl";
 import { useAxios } from "~/composables/useAxios";
 
-export default defineEventHandler(async (event) => {
+export default defineEventHandler(async () => {
   const api = useAxios();
-  const query = getQuery(event);
   try {
     const topRatedMoviesResponse = await api.get(API_URLS.TOP_RATED_MOVIES);
 
