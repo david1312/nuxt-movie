@@ -23,7 +23,13 @@ export default defineNuxtConfig({
     },
   },
   runtimeConfig: {
+    public: {
+      PusherKey: process.env.PusherKey,
+      PusherCluster: process.env.PusherCluster,
+    },
     AccessToken: process.env.AccessToken,
     ApiBaseUrl: process.env.ApiBaseUrl,
+    PusherAppID: process.env.PusherAppID,
+    PusherSecret: process.env.PusherSecret,
   },
 });

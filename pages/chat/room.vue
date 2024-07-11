@@ -1,6 +1,7 @@
 <template>
   <div>
-    <UCard class="" :ui="{ body: { padding: 'p-0 sm:p-0' } }">
+    bruh
+    <!-- <UCard class="" :ui="{ body: { padding: 'p-0 sm:p-0' } }">
       <template #header>
         <div class="flex items-center justify-between text-primary">
           <div class="flex items-center gap-x-2">
@@ -21,7 +22,6 @@
         </div>
       </template>
       <div class="flex">
-        <!-- Sidebar -->
         <div class="bg-slate-100 py-4 px-6">
           <div class="mb-4">
             <div
@@ -62,7 +62,6 @@
             </div>
           </div>
         </div>
-        <!-- Chat -->
         <div class="h-96 overflow-y-auto px-8 py-10 flex-1">
           <div
             class="bg-transparent w-full mb-3 flex"
@@ -118,56 +117,54 @@
           </UInput>
         </form>
       </template>
-    </UCard>
+    </UCard> -->
   </div>
 </template>
 
-<script setup lang="ts">
-import { io, type Socket } from "socket.io-client";
-const route = useRoute();
+<script setup>
+import Pusher from "pusher-js";
 
-interface Chat {
-  username: string;
-  text: string;
-  time: string;
-  room?: string;
-}
-type User = {
-  id: string;
-  username: string;
-  room: string;
-};
-const message = ref("");
-const chats = ref<Chat[]>([]);
-const users = ref<User[]>([]);
-const socket = ref<Socket>();
-const currentRoom = ref("");
-const sendMessage = async () => {
-  socket.value?.emit("chatMessage", message.value);
-  await nextTick(() => (message.value = ""));
-};
+Pusher.logToConsole = true;
+const runtimeConfig = useRuntimeConfig();
+// Pusher.logToConsole = true;
+// const runtimeConfig = useRuntimeConfig();
+// console.log(runtimeConfig.PusherKey);
+const pusher = new Pusher(runtimeConfig.public.PusherKey, {
+  cluster: runtimeConfig.public.PusherCluster,
+});
+const channel = pusher.subscribe("david-movies");
+
 onMounted(() => {
-  const { username, room } = route.query as Partial<Chat>;
-  if (!username || !room) {
-    navigateTo("/");
-  }
-  socket.value = io({
-    path: "/api/chat/ws",
-    transports: ["websocket", "polling"],
+  channel.bind("discord-chat", function (data) {
+    console.log({ data });
   });
-  //   Join ChatRoom
-  socket.value.emit("joinRom", { username, room });
-  socket.value.on("message", (response: Chat) => {
-    chats.value.push(response);
-  });
-  socket.value.on("roomUsers", (response: { room: string; users: User[] }) => {
-    currentRoom.value = response.room;
-    users.value = response.users;
-  });
+  // const { username, room } = route.query as Partial<Chat>;
+  // if (!username || !room) {
+  //   navigateTo("/");
+  // }
+  // socket.value = io({
+  //   path: "/api/chat/ws",
+  //   transports: ["websocket", "polling"],
+  // });
+  // //   Join ChatRoom
+  // socket.value.emit("joinRom", { username, room });
+  // socket.value.on("message", (response: Chat) => {
+  //   chats.value.push(response);
+  // });
+  // socket.value.on("roomUsers", (response: { room: string; users: User[] }) => {
+  //   currentRoom.value = response.room;
+  //   users.value = response.users;
+  // });
 });
 onBeforeUnmount(() => {
-  console.log("Disconnect Block");
-  socket.value?.disconnect();
+  if (channel) {
+    channel.unbind_all();
+    channel.unsubscribe();
+  }
+  if (pusher) {
+    pusher.disconnect();
+  }
+  console.log("Disconnect Publisher");
 });
 </script>
 
