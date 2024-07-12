@@ -1,3 +1,4 @@
+// External API URLs
 export const API_URLS = {
   MOVIES: "/3/discover/movie",
   SERIES: "/3/discover/tv",
@@ -9,3 +10,5 @@ export const API_URLS = {
   TOP_RATED_SERIES: "/3/tv/top_rated",
   UPCOMING_MOVIES: "/3/movie/upcoming",
 };
+
+// Internal API Endpoints

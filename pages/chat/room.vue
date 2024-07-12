@@ -1,7 +1,6 @@
 <template>
   <div>
-    bruh
-    <!-- <UCard class="" :ui="{ body: { padding: 'p-0 sm:p-0' } }">
+    <UCard class="" :ui="{ body: { padding: 'p-0 sm:p-0' } }">
       <template #header>
         <div class="flex items-center justify-between text-primary">
           <div class="flex items-center gap-x-2">
@@ -36,7 +35,7 @@
             <div
               class="text-gray-500 hover:text-gray-900 mb-2 capitalize text-base ml-2"
             >
-              {{ currentRoom }}
+              {{ "currentRoom" }}
             </div>
           </div>
           <div>
@@ -58,11 +57,11 @@
                   user.username === route.query.username,
               }"
             >
-              {{ user.username }}
+              {{ "user.username" }}
             </div>
           </div>
         </div>
-        <div class="h-96 overflow-y-auto px-8 py-10 flex-1">
+        <!-- <div class="h-96 overflow-y-auto px-8 py-10 flex-1">
           <div
             class="bg-transparent w-full mb-3 flex"
             v-for="(chat, i) in chats"
@@ -92,11 +91,11 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
 
       <template #footer>
-        <form @submit.prevent="sendMessage">
+        <form @submit.prevent="sendMessage()">
           <UInput
             v-model="message"
             placeholder="Enter your message...."
@@ -117,45 +116,45 @@
           </UInput>
         </form>
       </template>
-    </UCard> -->
+    </UCard>
   </div>
 </template>
 
 <script setup>
-import Pusher from "pusher-js";
+import Pusher from "pusher";
+import { usePusher } from "#imports";
 
 Pusher.logToConsole = true;
-const runtimeConfig = useRuntimeConfig();
-// Pusher.logToConsole = true;
-// const runtimeConfig = useRuntimeConfig();
-// console.log(runtimeConfig.PusherKey);
-const pusher = new Pusher(runtimeConfig.public.PusherKey, {
-  cluster: runtimeConfig.public.PusherCluster,
-});
-const channel = pusher.subscribe("david-movies");
+const pusher = usePusher();
+const id = new Date().getTime().toString();
+const channel = pusher.subscribe("public-netflix");
+
+const sendMessage = async () => {
+  // Trigger the event on the client side
+
+  const { data, error } = await $fetch("/pusher/send-message", {
+    method: "post",
+    body: {
+      username: "david",
+      socket_id: pusher.connection.socket_id,
+      id: id,
+      channel_name: "presence_netflix",
+    },
+  });
+
+  console.log({ data, error });
+  // pusherCl.trigger("public-netflix", "message", {
+  //   message: "my message",
+  //   name: "david",
+  // });
+};
 
 onMounted(() => {
-  channel.bind("discord-chat", function (data) {
+  channel.bind("message", function (data) {
     console.log({ data });
   });
-  // const { username, room } = route.query as Partial<Chat>;
-  // if (!username || !room) {
-  //   navigateTo("/");
-  // }
-  // socket.value = io({
-  //   path: "/api/chat/ws",
-  //   transports: ["websocket", "polling"],
-  // });
-  // //   Join ChatRoom
-  // socket.value.emit("joinRom", { username, room });
-  // socket.value.on("message", (response: Chat) => {
-  //   chats.value.push(response);
-  // });
-  // socket.value.on("roomUsers", (response: { room: string; users: User[] }) => {
-  //   currentRoom.value = response.room;
-  //   users.value = response.users;
-  // });
 });
+
 onBeforeUnmount(() => {
   if (channel) {
     channel.unbind_all();
@@ -164,7 +163,7 @@ onBeforeUnmount(() => {
   if (pusher) {
     pusher.disconnect();
   }
-  console.log("Disconnect Publisher");
+  console.log("disconnect pusher");
 });
 </script>
 

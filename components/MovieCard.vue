@@ -41,7 +41,7 @@
 </template>
 
 <script setup>
-import { useItem } from "~/composables/useItem";
+import { useItem } from "#imports";
 
 defineProps([
   "id",

@@ -1,4 +1,4 @@
-import { API_URLS } from "~/utils/apiUrl";
+import { API_URLS } from "~/utils/constant";
 import { useAxios } from "~/composables/useAxios";
 import { Movie } from "~/server/model/movie";
 

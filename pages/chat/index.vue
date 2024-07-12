@@ -11,13 +11,17 @@
             class="w-9 h-9 font-semibold"
           />
           <div class="text-primary font-semibold text-center text-3xl">
-            D'Movies Discord
+            D'Movies PublicDiscord
           </div>
         </div>
       </template>
 
       <UForm :state="state" @submit="onSubmit" class="space-y-6">
-        <UFormGroup label="Username" name="username">
+        <UFormGroup
+          label="Username"
+          name="username"
+          aria-placeholder="input your username here"
+        >
           <UInput v-model="state.username" />
         </UFormGroup>
 

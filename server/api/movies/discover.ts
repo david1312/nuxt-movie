@@ -1,10 +1,10 @@
 import { Movie } from "~/server/model/movie";
 // import mockMovies from "~/data/mockApiMovies.json";
 // import mockSeries from "~/data/mockApiSeries.json";
-import { API_URLS } from "~/utils/apiUrl";
+import { API_URLS } from "~/utils/constant";
 import { useAxios } from "~/composables/useAxios";
 
-export default defineEventHandler(async () => {
+export default defineEventHandler(async (_event) => {
   const api = useAxios();
   // const nuxtApp = useNuxtApp();
   // const api = nuxtApp.$axios as AxiosInstance;
