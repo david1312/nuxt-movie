@@ -22,27 +22,23 @@
       </template>
       <div class="flex">
         <!-- Sidebar -->
-        <div class="bg-slate-100 py-4 px-6">
+        <div class="border-solid border-2 border-slate-800 py-4 px-6">
           <div class="mb-4">
-            <div
-              class="flex items-center gap-x-2 mb-2 px-3 py-1.5 rounded-md bg-white"
-            >
+            <div class="flex items-center gap-x-2 mb-2 px-3 py-1.5 rounded-md">
               <UIcon
                 name="i-heroicons-chat-bubble-bottom-center-text"
                 class="w-6 h-6 font-semibold"
               />
-              <div class="text-base">Room Name</div>
+              <div class="text-primary">Room Name</div>
             </div>
             <div
-              class="text-gray-500 hover:text-gray-900 mb-2 capitalize text-base ml-2"
+              class="text-primary hover:text-gray-900 mb-2 capitalize text-base ml-2"
             >
               {{ currentRoom }}
             </div>
           </div>
           <div>
-            <div
-              class="flex items-center gap-x-2 mb-2 px-3 py-1.5 rounded-md bg-white"
-            >
+            <div class="flex items-center gap-x-2 mb-2 px-3 py-1.5 rounded-md">
               <UIcon
                 name="i-heroicons-user-group"
                 class="w-6 h-6 font-semibold"
@@ -52,11 +48,12 @@
             <div
               v-for="(user, i) in users"
               :key="i"
-              class="text-gray-500 hover:text-gray-900 mb-2 capitalize text-base ml-2"
-              :class="{
-                'border-b border-primary':
-                  user.username === route.query.username,
-              }"
+              :class="[
+                'mb-2 capitalize ml-2 hover:text-gray-900',
+                user.username === $route.query.username
+                  ? 'text-primary'
+                  : 'text-slate-100',
+              ]"
             >
               {{ user.username }}
             </div>
@@ -79,7 +76,7 @@
               :class="{
                 'bg-red-100': chat.username === 'NuxtChatapp Admin',
                 'bg-primary/20': chat.username === route.query.username,
-                'bg-green-300': chat.username !== route.query.username,
+                'bg-sky-950': chat.username !== route.query.username,
               }"
             >
               <div class="flex items-center gap-x-3">
